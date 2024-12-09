@@ -1,6 +1,5 @@
 package com.github.syndexmx.tmseffmob.entities;
 
-import com.github.syndexmx.tmseffmob.models.Task;
 import com.github.syndexmx.tmseffmob.models.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
+@Builder(toBuilder = true)
 @Table(name = "tasks")
 public class TaskEntity {
 
@@ -27,7 +26,7 @@ public class TaskEntity {
 
     @ManyToOne
             @JoinColumn(name = "id")
-    User executor;
+    UserEntity executor;
 
     @Column(name = "status", length = 12)
     String status;

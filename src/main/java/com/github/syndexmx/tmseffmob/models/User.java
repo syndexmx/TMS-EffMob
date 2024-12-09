@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Data
 public class User {
 

@@ -1,9 +1,7 @@
 package com.github.syndexmx.tmseffmob.entities;
 
 import com.github.syndexmx.tmseffmob.models.Task;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
+@Builder(toBuilder = true)
 @Table(name = "users")
 public class UserEntity {
 
@@ -29,6 +27,8 @@ public class UserEntity {
 
     Boolean isAdmin;
 
-    List<Task> tasks;
+    @OneToMany
+            @JoinColumn(name = "id")
+    List<TaskEntity> tasks;
 
 }
