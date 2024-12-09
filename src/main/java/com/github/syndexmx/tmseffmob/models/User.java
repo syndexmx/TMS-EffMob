@@ -16,7 +16,6 @@ public class User {
     UUID id;
     String email;
     String password;
-    String passwordSolt;
     Boolean isAdmin;
 
 }

@@ -1,5 +1,6 @@
 package com.github.syndexmx.tmseffmob.entities;
 
+import com.github.syndexmx.tmseffmob.models.Task;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,8 +27,8 @@ public class UserEntity {
 
     String password;
 
-    String passwordSolt;
-
     Boolean isAdmin;
+
+    List<Task> tasks;
 
 }

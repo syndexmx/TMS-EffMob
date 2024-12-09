@@ -22,7 +22,7 @@ public class Task {
 
     public static enum TaskStatus {
         WAITING,
-        UNDERWAY,
+        IN_PROGRESS,
         FINISHED;
     }
 

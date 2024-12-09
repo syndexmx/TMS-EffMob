@@ -2,9 +2,7 @@ package com.github.syndexmx.tmseffmob.entities;
 
 import com.github.syndexmx.tmseffmob.models.Task;
 import com.github.syndexmx.tmseffmob.models.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,10 +25,14 @@ public class TaskEntity {
 
     String taskContent;
 
+    @ManyToOne
+            @JoinColumn(name = "id")
     User executor;
 
-    Integer status;
+    @Column(name = "status", length = 12)
+    String status;
 
-    Integer priority;
+    @Column(name = "priority", length = 12)
+    String priority;
 
 }
