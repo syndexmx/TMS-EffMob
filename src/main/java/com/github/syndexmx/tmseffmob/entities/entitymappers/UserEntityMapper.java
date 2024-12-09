@@ -1,7 +1,11 @@
 package com.github.syndexmx.tmseffmob.entities.entitymappers;
 
+import com.github.syndexmx.tmseffmob.entities.TaskEntity;
 import com.github.syndexmx.tmseffmob.entities.UserEntity;
 import com.github.syndexmx.tmseffmob.models.User;
+
+import static com.github.syndexmx.tmseffmob.entities.entitymappers.TaskEntityMapper.taskEntityToTask;
+import static com.github.syndexmx.tmseffmob.entities.entitymappers.TaskEntityMapper.taskToTaskEntity;
 
 public class UserEntityMapper {
 
@@ -11,6 +15,9 @@ public class UserEntityMapper {
                 .email(user.getEmail())
                 .isAdmin(user.getIsAdmin())
                 .password(user.getPassword())
+                .tasks(user.getTasks().stream()
+                        .map((task -> taskToTaskEntity(task)))
+                        .toList())
                 .build();
     }
 
@@ -20,6 +27,9 @@ public class UserEntityMapper {
                 .email(userEntity.getEmail())
                 .isAdmin(userEntity.getIsAdmin())
                 .password(userEntity.getPassword())
+                .tasks(userEntity.getTasks().stream()
+                        .map((taskEntity -> taskEntityToTask(taskEntity)))
+                        .toList())
                 .build();
     }
 
