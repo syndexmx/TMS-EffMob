@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Data
 public class Task {
 
@@ -22,7 +22,7 @@ public class Task {
 
     public static enum TaskStatus {
         WAITING,
-        UNDERWAY,
+        IN_PROGRESS,
         FINISHED;
     }
 

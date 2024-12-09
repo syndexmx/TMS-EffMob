@@ -9,14 +9,13 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Data
 public class User {
 
     UUID id;
     String email;
     String password;
-    String passwordSolt;
     Boolean isAdmin;
 
 }
