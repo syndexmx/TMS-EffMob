@@ -32,3 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 /task.txt
+
+/src/main/resources/application.properties
+
+
+
