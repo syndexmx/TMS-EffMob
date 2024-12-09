@@ -18,10 +18,13 @@ import java.util.UUID;
 public class TaskEntity {
 
     @Id
+            @Column(name = "task_id")
     UUID taskId;
 
+    @Column(name = "task_name")
     String taskName;
 
+    @Column(name = "task_content")
     String taskContent;
 
     @ManyToOne

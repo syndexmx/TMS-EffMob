@@ -19,12 +19,16 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
+            @Column(name = "user_id")
     UUID id;
 
+    @Column(name = "email")
     String email;
 
+    @Column(name = "password")
     String password;
 
+    @Column(name = "is_admin")
     Boolean isAdmin;
 
     @OneToMany

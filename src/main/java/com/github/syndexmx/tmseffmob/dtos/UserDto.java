@@ -1,5 +1,6 @@
-package com.github.syndexmx.tmseffmob.models;
+package com.github.syndexmx.tmseffmob.dtos;
 
+import com.github.syndexmx.tmseffmob.models.Task;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +13,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @Data
-public class User {
+public class UserDto {
 
     UUID id;
     String email;
-    String password;
     Boolean isAdmin;
-    List<Task> tasks;
+    List<TaskDto> tasks;
 
 }
