@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OptimisticLock;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,10 +19,11 @@ import java.util.UUID;
 @Data
 @Builder(toBuilder = true)
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
             @Column(name = "user_id")
+            @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
     @Column(name = "email")
@@ -33,6 +37,7 @@ public class UserEntity {
 
     @OneToMany
             @JoinColumn(name = "id")
+            @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     List<TaskEntity> tasks;
 
 }
