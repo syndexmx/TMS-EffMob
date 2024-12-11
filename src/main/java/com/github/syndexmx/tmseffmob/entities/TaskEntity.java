@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OptimisticLock;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
@@ -15,10 +18,11 @@ import java.util.UUID;
 @Data
 @Builder(toBuilder = true)
 @Table(name = "tasks")
-public class TaskEntity {
+public class TaskEntity implements Serializable {
 
     @Id
             @Column(name = "task_id")
+            @GeneratedValue(strategy = GenerationType.AUTO)
     UUID taskId;
 
     @Column(name = "task_name")
@@ -27,7 +31,7 @@ public class TaskEntity {
     @Column(name = "task_content")
     String taskContent;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH})
             @JoinColumn(name = "id")
     UserEntity executor;
 

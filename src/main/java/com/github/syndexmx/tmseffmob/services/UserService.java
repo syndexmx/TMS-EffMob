@@ -10,6 +10,8 @@ import java.util.UUID;
 @Service
 public interface UserService {
 
+    User create(User user);
+
     User save(User user);
 
     boolean isIdExistent(UUID id);
