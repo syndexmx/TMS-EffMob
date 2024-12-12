@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OptimisticLock;
+import org.hibernate.generator.values.GeneratedValues;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,6 @@ public class UserEntity implements Serializable {
 
     @Id
             @Column(name = "user_id")
-            @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
     @Column(name = "email")
@@ -36,7 +36,7 @@ public class UserEntity implements Serializable {
     Boolean isAdmin;
 
     @OneToMany
-            @JoinColumn(name = "id")
+            @JoinColumn(name = "task_id")
             @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     List<TaskEntity> tasks;
 
