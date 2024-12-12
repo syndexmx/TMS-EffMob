@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User create(User user) {
         UserEntity userEntity = userToUserEntity(user);
         if (userRepository.countExistsByEmail(user.getEmail()) > 0) {

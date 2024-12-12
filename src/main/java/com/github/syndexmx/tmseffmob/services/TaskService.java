@@ -1,6 +1,7 @@
 package com.github.syndexmx.tmseffmob.services;
 
 import com.github.syndexmx.tmseffmob.models.Task;
+import com.github.syndexmx.tmseffmob.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,5 @@ public interface TaskService {
     List<Task> listAllTasks();
 
     void deleteByTaskId(UUID id);
-
 
 }
