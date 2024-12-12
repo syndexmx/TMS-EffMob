@@ -25,15 +25,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public User create(User user) {
         UserEntity userEntity = userToUserEntity(user);
-        if (userRepository.existsById(user.getId())) {
+        if (userRepository.countExistsByEmail(user.getEmail()) > 0) {
             throw new RuntimeException("User already exists");
         }
+        userEntity.setId(UUID.randomUUID());
         UserEntity createdUserEntity = userRepository.save(userEntity);
-        User createdUser = userEntityToUser(createdUserEntity);
-        return createdUser;
+        return userEntityToUser(createdUserEntity);
     }
 
     @Override

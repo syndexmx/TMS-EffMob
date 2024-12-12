@@ -22,7 +22,6 @@ public class TaskEntity implements Serializable {
 
     @Id
             @Column(name = "task_id")
-            @GeneratedValue(strategy = GenerationType.AUTO)
     UUID taskId;
 
     @Column(name = "task_name")
@@ -31,8 +30,9 @@ public class TaskEntity implements Serializable {
     @Column(name = "task_content")
     String taskContent;
 
-    @ManyToOne(cascade = {CascadeType.DETACH})
-            @JoinColumn(name = "id")
+    @ManyToOne
+            @JoinColumn(name = "user_id")
+            @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     UserEntity executor;
 
     @Column(name = "status", length = 12)
