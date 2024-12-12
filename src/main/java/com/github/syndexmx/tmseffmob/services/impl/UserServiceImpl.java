@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User create(User user) {
         UserEntity userEntity = userToUserEntity(user);
-        if (userRepository.countExistsByEmail(user.getEmail()) > 0) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("User already exists");
         }
         userEntity.setId(UUID.randomUUID());
@@ -66,9 +66,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByEmail(String email) {
-
-        //TODO implement method
-        throw new RuntimeException("Method not implemented");
+        return userRepository.findByEmail(email).stream().map(
+                userEntity ->  {
+                    if (userEntity == null) throw new RuntimeException("Email not found");
+                    return userEntityToUser(userEntity);}
+                ).findFirst();
     }
 
     @Override

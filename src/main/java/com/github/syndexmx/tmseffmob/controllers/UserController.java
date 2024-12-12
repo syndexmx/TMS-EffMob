@@ -6,13 +6,13 @@ import com.github.syndexmx.tmseffmob.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 import static com.github.syndexmx.tmseffmob.dtos.dtomappers.CreateUserDtoMapper.createUserDtoToUser;
 import static com.github.syndexmx.tmseffmob.dtos.dtomappers.CreateUserDtoMapper.userToCreateUserDto;
+import static com.github.syndexmx.tmseffmob.dtos.dtomappers.UserDtoMapper.userToUserDto;
 
 @RestController
 @RequestMapping
@@ -35,6 +35,13 @@ public class UserController {
         }
         CreateUserDto createdUserDto = userToCreateUserDto(createdUser);
         return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "api/v0/users/{email}")
+    public ResponseEntity<Object> retrieveUser(@PathVariable final String email) {
+        final Optional<User> foundUser = userService.findByEmail(email);
+        return foundUser.map(user -> new ResponseEntity<Object>(userToUserDto(user), HttpStatus.OK))
+                .orElse(new ResponseEntity<Object>("E-mail not found", HttpStatus.NOT_FOUND));
     }
 
 }
