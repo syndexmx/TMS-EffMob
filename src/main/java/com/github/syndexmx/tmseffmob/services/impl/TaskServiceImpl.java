@@ -1,5 +1,6 @@
 package com.github.syndexmx.tmseffmob.services.impl;
 
+import com.github.syndexmx.tmseffmob.entities.TaskEntity;
 import com.github.syndexmx.tmseffmob.models.Task;
 import com.github.syndexmx.tmseffmob.repositories.TaskRepository;
 import com.github.syndexmx.tmseffmob.services.TaskService;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.github.syndexmx.tmseffmob.entities.entitymappers.TaskEntityMapper.taskEntityToTask;
+import static com.github.syndexmx.tmseffmob.entities.entitymappers.TaskEntityMapper.taskToTaskEntity;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -21,8 +25,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task save(Task task) {
-        //TODO implement method
-        throw new RuntimeException("Method not implemented");
+        TaskEntity taskEntity = taskToTaskEntity(task);
+        if (task.getTaskId() == null) {
+            taskEntity.setTaskId(UUID.randomUUID());
+        }
+        TaskEntity savedTaskEntity = taskRepository.save(taskEntity);
+        return taskEntityToTask(savedTaskEntity);
     }
 
     @Override
